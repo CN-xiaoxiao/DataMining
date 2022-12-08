@@ -1,4 +1,157 @@
 package com.xiaoxiao.util;
 
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.bidimap.TreeBidiMap;
+
+import java.io.*;
+import java.util.*;
+
 public class AprioriUtil {
+    /**
+     * 读取原始数据集
+     * @param fileName 原始数据集的名称
+     * @return 一个保存原始数据集的数组
+     */
+    public static List<String> loadData(String fileName) {
+        File file = new File(fileName);
+        BufferedReader reader = null;
+        List<String> data = new ArrayList<String>();
+
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String tempString = null;
+
+            while ((tempString = reader.readLine()) != null) {
+                data.add(tempString);
+            }
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return data;
+    }
+
+    /**
+     * 将原始数据集中的数据建立一个汉字（英文）-数值的索引表
+     * 使用Apache Commons Collections 4.4，可以很好的解决一些集合操作，
+     * 其他地方就先不改了，只弄这个hashMap的
+     * @param array 数据集
+     * @return 返回一个索引表
+     */
+    public static BidiMap<String, Integer> makeIndex(List<List<String>> array) {
+        // 注意如果有相同的值存在BidiMap会覆盖掉已有的key，但是我们这个是索引表，不存在相同的值
+        BidiMap<String, Integer> result = new TreeBidiMap<>();
+        int index = 1;
+        List<String> temp = new ArrayList<String>();
+        // 1.遍历array数据集
+        for (List<String> s1 : array) {
+            for (String s2 : s1) {
+                // 2.判断当前名词是否在temp中，如果在，则说明重复了，否则，将该名词（元素）加入temp中
+                if (!temp.contains(s2)) {
+                    temp.add(s2);
+                }
+            }
+        }
+
+        // 3.建立映射表
+        for (String s : temp) {
+            result.put(s, index++);
+        }
+        return result;
+    }
+
+    /**
+     * 切割数组，每一个名词单独切割出来
+     * @param array 数据集
+     * @return 切割好的数组
+     */
+    public static List<List<String>> cattingArray(List<String> array) {
+        List<List<String>> result = new ArrayList<List<String>>();
+        List<String> curList = null;
+        String[] temp = null;
+
+        // 遍历数据集
+        for (String s : array) {
+            // 分割数组，分割每一行数据
+            temp = s.split("、");
+            // 创建一个新的arraylist数组来存放分割后的每一个名词
+            curList = new ArrayList<>();
+            // 遍历temp，逐个存入curList中
+            for (String s2 : temp) {
+                curList.add(s2);
+            }
+            // 将保存了每一行数据的curList数组存入新的数据集容器
+            result.add(curList);
+        }
+        return result;
+    }
+
+    /**
+     * 将文字数据集转变为数字数据集
+     * @param array 分割好了的数据集
+     * @param index 文字-数字 索引表
+     * @return
+     */
+    public static List<List<Integer>> strToSum(List<List<String>> array, BidiMap<String, Integer> index) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> curList = null;
+
+        for (List list : array) {
+            curList = new ArrayList<>();
+
+            for (int i = 0; i < list.size(); i++) {
+                curList.add(index.get(list.get(i)));
+            }
+            result.add(curList);
+        }
+
+        return result;
+    }
+
+    /**
+     * 将数字数据集变回文字
+     * @param array
+     * @param index
+     * @return
+     */
+    public static List<List<String>> sumToStr(List<List<Integer>> array, BidiMap<String, Integer> index) {
+        List<List<String>> result = new ArrayList<>();
+        List<String> curList = null;
+        BidiMap<Integer, String> iMap = index.inverseBidiMap();
+
+        for (List list : array) {
+            curList = new ArrayList<>();
+            for (int i = 0; i < list.size(); i++) {
+                curList.add(iMap.get(list.get(i)));
+            }
+            result.add(curList);
+        }
+
+        return result;
+    }
+
+    /**
+     * 将频繁项目集从map集合变为List集合，同时去掉该项目出现的次数
+     * @param map
+     * @return
+     */
+    public static List<List<Integer>> setToList(Map<List<Integer>, Integer> map) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (Map.Entry<List<Integer>, Integer> entry : map.entrySet()) {
+            List<Integer> mapKey = entry.getKey();
+            result.add(mapKey);
+        }
+
+        return result;
+    }
 }
