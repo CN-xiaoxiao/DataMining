@@ -154,4 +154,37 @@ public class AprioriUtil {
 
         return result;
     }
+
+    /**
+     * 得到频繁项集的次数，并返回一个map集合
+     * @param dataSet 数据集
+     * @param allFrequent 频繁项集
+     * @return map集合
+     */
+    public Map<List<Integer>, Integer> getFrequentCount(List<List<Integer>> dataSet, List<List<Integer>> allFrequent) {
+        Map<List<Integer>, Integer> result = new LinkedHashMap<List<Integer>, Integer>();
+
+        for (List<Integer> frequent : allFrequent) {
+            int count = 0;
+            for (List<Integer> list : dataSet) {
+                if (list.containsAll(frequent)) {
+                    count++;
+                }
+            }
+            result.put(frequent,count);
+        }
+
+        return result;
+    }
+
+    /**
+     * 将一个频繁项集切割组合成多个List数组，并以map的形式返回
+     * @param frequent 频繁项集
+     * @return 一个包含了所有该频繁项集的排列组合的map集合
+     */
+    public Map<List<Integer>, List<Integer>> splitList(List<Integer> frequent) {
+
+
+        return null;
+    }
 }
