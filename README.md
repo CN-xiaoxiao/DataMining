@@ -9,7 +9,7 @@ ps.个人认为，还是润去用python吧，用Java一半以上的时间用在�
 ---
 如果对你有帮助，给个star吧！呜呜呜
 
-- [ ] Apriori
+- [X] Apriori
 - [ ] Close
 - [ ] EM
 - [ ] KNN
