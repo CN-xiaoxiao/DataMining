@@ -1,0 +1,14 @@
+A、B、C、D、E、F、G
+A、B、C、D、E、H
+A、B、C、D、E、F、G、H
+A、B、C、G、H
+A、B、C、D、G、H
+A、B、C、D、E、F、G、H
+A、B、C、D、E、F、G
+A、B、C、E、G、H
+A、B、C、D、E、F、H
+C、D、E、F、G、H
+A、B、C、D、G、H
+A、C、D、E、F、G、H
+A、B、C、E、F、G、H
+B、C、E、F、G、H

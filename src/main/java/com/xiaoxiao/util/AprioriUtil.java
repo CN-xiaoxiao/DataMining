@@ -140,6 +140,23 @@ public class AprioriUtil {
     }
 
     /**
+     * 将数字数据集变回文字
+     * @param array
+     * @param index
+     * @return
+     */
+    public static List<String> sumToStrForList(List<Integer> array, BidiMap<String, Integer> index) {
+        BidiMap<Integer, String> iMap = index.inverseBidiMap();
+        List<String> list = new ArrayList<>();
+
+        for (int i = 0; i < array.size(); i++) {
+            list.add(iMap.get(array.get(i)));
+        }
+
+        return list;
+    }
+
+    /**
      * 将频繁项目集从map集合变为List集合，同时去掉该项目出现的次数
      * @param map
      * @return
@@ -161,7 +178,7 @@ public class AprioriUtil {
      * @param allFrequent 频繁项集
      * @return map集合
      */
-    public Map<List<Integer>, Integer> getFrequentCount(List<List<Integer>> dataSet, List<List<Integer>> allFrequent) {
+    public static Map<List<Integer>, Integer> getFrequentCount(List<List<Integer>> dataSet, List<List<Integer>> allFrequent) {
         Map<List<Integer>, Integer> result = new LinkedHashMap<List<Integer>, Integer>();
 
         for (List<Integer> frequent : allFrequent) {
@@ -179,12 +196,56 @@ public class AprioriUtil {
 
     /**
      * 将一个频繁项集切割组合成多个List数组，并以map的形式返回
+     * 难点，如何把一个数组排列组合的拆分成两个数组。
      * @param frequent 频繁项集
      * @return 一个包含了所有该频繁项集的排列组合的map集合
      */
-    public Map<List<Integer>, List<Integer>> splitList(List<Integer> frequent) {
+    public static Map<List<Integer>, List<Integer>> splitList(List<Integer> frequent) {
 
+        Map<List<Integer>, List<Integer>> map = new HashMap<List<Integer>, List<Integer>>();
 
-        return null;
+        // 全部的子集
+        List<List<Integer>> allTrueSubset = new ArrayList<List<Integer>>();
+
+        // 1.求出频繁项集的所有真子集
+        //子集的数量
+        int n = 1 << frequent.size();
+        List<Integer> temp = null;
+
+        for(int i = 0; i < n; i ++)
+        {
+            temp = new ArrayList<>();
+            int j = i;
+            int index = frequent.size() - 1;
+            //循环前检测j是否是000
+            while(j > 0)
+            {
+                if((j&1) == 1)
+                {
+                    temp.add(frequent.get(index));
+                }
+                j = j >> 1;
+                index --;
+            }
+
+            temp.sort(Comparator.comparing(Integer::intValue));
+            if (temp.size() != 0 && temp.size() != frequent.size()) {
+                allTrueSubset.add(temp);
+            }
+        }
+
+        // 2.遍历真子集，并在频繁项集中去除
+        List<Integer> allOtherSubset = null;
+        for (List<Integer> list : allTrueSubset) {
+            allOtherSubset = new ArrayList<Integer>();
+            HashSet h1 = new HashSet(frequent);
+            HashSet h2 = new HashSet(list);
+            h1.removeAll(h2);
+            allOtherSubset.addAll(h1);
+
+            map.put(list, allOtherSubset);
+        }
+
+        return map;
     }
 }
