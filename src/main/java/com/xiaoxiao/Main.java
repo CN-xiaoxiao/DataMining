@@ -1,10 +1,9 @@
 package com.xiaoxiao;
 
-import com.xiaoxiao.apriori.Apriori;
-import com.xiaoxiao.apriori.AprioriStart;
+import com.xiaoxiao.pageRank.PageRank;
+import com.xiaoxiao.pageRank.PageRankStart;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Main {

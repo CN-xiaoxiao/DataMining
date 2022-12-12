@@ -1,8 +1,4 @@
-package com.xiaoxiao;
-
-import com.xiaoxiao.util.PageRankUtil;
-
-import java.util.List;
+package com.xiaoxiao.pageRank;
 
 public class PageRankStart {
     private PageRank pageRank;
