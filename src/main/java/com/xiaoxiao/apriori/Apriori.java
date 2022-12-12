@@ -1,4 +1,4 @@
-package com.xiaoxiao;
+package com.xiaoxiao.apriori;
 
 
 import java.util.*;

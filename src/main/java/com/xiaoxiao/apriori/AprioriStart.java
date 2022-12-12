@@ -1,4 +1,4 @@
-package com.xiaoxiao;
+package com.xiaoxiao.apriori;
 
 import com.xiaoxiao.util.AprioriUtil;
 import org.apache.commons.collections4.BidiMap;

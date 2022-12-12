@@ -1,5 +1,6 @@
 package com.xiaoxiao;
 
+import com.xiaoxiao.apriori.Apriori;
 import com.xiaoxiao.util.AprioriUtil;
 import org.apache.commons.collections4.BidiMap;
 import org.junit.Test;
