@@ -13,7 +13,7 @@ ps.个人认为，还是润去用python吧，用Java一半以上的时间用在�
 
 - [X] Apriori
 - [ ] Close
-- [ ] EM
-- [ ] KNN
+- [X] EM
+- [X] KNN
 - [ ] ID3
 - [X] PageRank
