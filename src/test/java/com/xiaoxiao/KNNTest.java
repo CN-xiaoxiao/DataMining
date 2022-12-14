@@ -1,5 +1,6 @@
 package com.xiaoxiao;
 
+import com.xiaoxiao.knn.KNN;
 import com.xiaoxiao.util.KNNUtil;
 import org.junit.Test;
 

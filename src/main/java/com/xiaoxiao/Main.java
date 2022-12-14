@@ -1,9 +1,6 @@
 package com.xiaoxiao;
 
-import com.xiaoxiao.em.EM;
-import com.xiaoxiao.em.EMStart;
-import com.xiaoxiao.pageRank.PageRank;
-import com.xiaoxiao.pageRank.PageRankStart;
+import com.xiaoxiao.knn.KNN;
 import com.xiaoxiao.util.KNNUtil;
 
 import java.util.ArrayList;
