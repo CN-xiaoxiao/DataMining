@@ -1,4 +1,4 @@
-package com.xiaoxiao;
+package com.xiaoxiao.pageRank;
 
 import com.xiaoxiao.util.PageRankUtil;
 

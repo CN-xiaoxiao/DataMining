@@ -1,10 +1,12 @@
 package com.xiaoxiao;
 
-import com.xiaoxiao.apriori.Apriori;
-import com.xiaoxiao.apriori.AprioriStart;
+import com.xiaoxiao.em.EM;
+import com.xiaoxiao.em.EMStart;
+import com.xiaoxiao.pageRank.PageRank;
+import com.xiaoxiao.pageRank.PageRankStart;
+import com.xiaoxiao.util.KNNUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -17,18 +19,33 @@ public class Main {
 //        aprioriStart.printFrequentSet(allFreSet);
 //        aprioriStart.getStrongAssociationRules(allFreSet);
 
+        /**
+         * 4. EM算法
+         */
+//        EMStart emStart = new EMStart(new EM("src/main/resources/", "data4.txt", new double[]{0.2,0.7}, 0.01));
+//        emStart.startEM();
+
+        /**
+         * 5、KNN算法
+         */
+        List<List<String>> dataSet = KNNUtil.loadData("src/main/resources/", "data5.txt");
+        List<String> list = new ArrayList<String>();
+        list.add("易昌");
+        list.add("1.74");
+        KNN Knn = new KNN(dataSet, list,5);
+        Knn.knn();
 
         /**
          * 9. PageRank算法
          */
-        List<Integer> R = new ArrayList<Integer>(4);
-        R.add(1);
-        R.add(1);
-        R.add(1);
-        R.add(1);
-
-        PageRankStart pageRankStart = new PageRankStart(new PageRank("src/main/resources/",
-                "data9.txt",R,0.85,0.1));
-        pageRankStart.pageRankStart();
+//        List<Integer> R = new ArrayList<Integer>(4);
+//        R.add(1);
+//        R.add(1);
+//        R.add(1);
+//        R.add(1);
+//
+//        PageRankStart pageRankStart = new PageRankStart(new PageRank("src/main/resources/",
+//                "data9.txt",R,0.85,0.1));
+//        pageRankStart.pageRankStart();
     }
 }

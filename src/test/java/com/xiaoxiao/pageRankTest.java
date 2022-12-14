@@ -1,5 +1,6 @@
 package com.xiaoxiao;
 
+import com.xiaoxiao.pageRank.PageRank;
 import com.xiaoxiao.util.PageRankUtil;
 import org.junit.Test;
 
