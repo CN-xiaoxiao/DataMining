@@ -1,5 +1,6 @@
 package com.xiaoxiao;
 
+import com.xiaoxiao.kmeans.KMeans;
 import com.xiaoxiao.knn.KNN;
 import com.xiaoxiao.util.KNNUtil;
 
@@ -25,12 +26,18 @@ public class Main {
         /**
          * 5、KNN算法
          */
-        List<List<String>> dataSet = KNNUtil.loadData("src/main/resources/", "data5.txt");
-        List<String> list = new ArrayList<String>();
-        list.add("易昌");
-        list.add("1.74");
-        KNN Knn = new KNN(dataSet, list,5);
-        Knn.knn();
+//        List<List<String>> dataSet = KNNUtil.loadData("src/main/resources/", "data5.txt");
+//        List<String> list = new ArrayList<String>();
+//        list.add("易昌");
+//        list.add("1.74");
+//        KNN Knn = new KNN(dataSet, list,5);
+//        Knn.knn();
+
+        /**
+         * 8. K-Means算法
+         */
+        KMeans kMeans = new KMeans("src/main/resources/","data8.txt",3, 0.001);
+        kMeans.kMeans();
 
         /**
          * 9. PageRank算法
