@@ -1,4 +1,4 @@
-package com.xiaoxiao;
+package com.xiaoxiao.knn;
 
 
 import com.xiaoxiao.util.KNNUtil;
