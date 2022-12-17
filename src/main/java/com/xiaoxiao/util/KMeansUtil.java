@@ -143,6 +143,7 @@ public class KMeansUtil {
         return center;
     }
 
+    // TODO:计算平方误差总和
     /**
      * 计算准则函数E
      * @param dataSet 数据集
@@ -157,11 +158,18 @@ public class KMeansUtil {
         for (int i = 0; i < k; i++) {
             for (int j = 0; j < clusters.get(i).size(); j++) {
                 Point temp = clusters.get(i).get(j);
+                double tempX = temp.getX();
+                double tempY = temp.getY();
+                double centerX = center.get(i).getX();
+                double centerY = center.get(i).getY();
+
+                result += Math.pow((tempX-centerX),2);
+                result += Math.pow((tempY-centerY),2);
             }
         }
 
 
-        return 0.0;
+        return result;
     }
 
     /**

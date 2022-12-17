@@ -20,7 +20,8 @@ public class KMeans {
     public void kMeans() {
         this.center = KMeansUtil.initCenter(this.dataSet, this.k);
         List<Double> E = new ArrayList<Double>();
-        for (int i = 0; ; i++) {
+        int i;
+        for (i = 0; ; i++) {
             clusters = KMeansUtil.setCluster(dataSet,center,k);
             E.add(KMeansUtil.getE(dataSet,center,clusters,k));
 
@@ -30,8 +31,14 @@ public class KMeans {
                 }
             }
             center = KMeansUtil.setNewCenter(dataSet, clusters, k);
+            System.out.println("******第" + (i+1) + "次迭代**********");
+            printClusters();
         }
+        System.out.println("******最终**********");
+        printClusters();
+    }
 
+    public void printClusters() {
         for (int i = 0; i < clusters.size(); i++) {
             System.out.print(center.get(i).getName() + "元素: ");
             for (int j = 0; j < clusters.get(i).size(); j++) {
@@ -40,7 +47,6 @@ public class KMeans {
             System.out.println();
         }
     }
-
     public KMeans(String path, String fileName, int k, double threshold) {
         this.k = k;
         this.Threshold = threshold;
