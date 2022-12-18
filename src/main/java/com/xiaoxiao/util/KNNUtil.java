@@ -58,13 +58,29 @@ public class KNNUtil {
 
         // k个数据分别与带查询的数据的距离差看与newAndList哪个相差大，如果newDataHigh的更接近，
         // 将k个数据中最不接近list的替换掉（这里返回下标）
+        double[] arrayDistance = new double[array.size()];
+        boolean flag = false;
         for (int i = 0; i < array.size(); i++) {
-            double temp = Math.abs(arrayHigh[i] - listHigh);
+            arrayDistance[i] = Math.abs(arrayHigh[i] - listHigh);
             // 问题：这里是绝对值，如果大于这个数和小于这个数的差的绝对值一样，该如何判断？这里没处理
             // 也就是说，加入还是不加入。感觉影响挺大的。
             // 或许不能直接相减？应该要优化他们差距的算法。
-            if (temp > newAndList) {
-                return i;
+            if (arrayDistance[i] > newAndList) {
+                flag = true;
+            }
+        }
+
+        if (flag) {
+            double temp = arrayDistance[0];
+            for (int i = 1; i < arrayDistance.length; i++) {
+                if (arrayDistance[i] > temp) {
+                    temp = arrayDistance[i];
+                }
+            }
+            for (int i = 0; i < arrayDistance.length; i++) {
+                if (arrayDistance[i] == temp) {
+                    return i;
+                }
             }
         }
 
