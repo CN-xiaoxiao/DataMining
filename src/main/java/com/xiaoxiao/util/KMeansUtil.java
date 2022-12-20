@@ -56,18 +56,23 @@ public class KMeansUtil {
         int dataLength = dataSet.size();
         int temp = random.nextInt(dataLength);
         randoms[0] = temp;
+        int index = 1;
 
-        for (int i = 1; i < k; i++) {
+        for (;;) {
+            if (index == k) {
+                break;
+            }
             boolean flag = false;
             temp = random.nextInt(dataLength);
-            for (int j = 0; j <= i; j++) {
+            for (int j = 0; j < k; j++) {
                 if (randoms[j] == temp) {
                     flag = true;
                     break;
                 }
             }
+
             if (!flag) {
-                randoms[i] = temp;
+                randoms[index++] = temp;
             }
         }
 
